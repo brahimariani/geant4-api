@@ -15,7 +15,8 @@ from app.core.geometry_builder import (
 router = APIRouter()
 
 
-@router.get("/", response_model=List[str])
+@router.get("", response_model=List[str])
+@router.get("/", response_model=List[str], include_in_schema=False)
 async def list_geometries():
     """List all saved geometry configurations."""
     return geometry_builder.list_geometries()
@@ -79,7 +80,8 @@ def _material_description(mat: MaterialType) -> str:
     return descriptions.get(mat, "")
 
 
-@router.post("/", response_model=Dict[str, str])
+@router.post("", response_model=Dict[str, str])
+@router.post("/", response_model=Dict[str, str], include_in_schema=False)
 async def create_geometry(geometry: DetectorGeometry):
     """
     Create and save a new geometry configuration.

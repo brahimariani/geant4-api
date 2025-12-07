@@ -17,7 +17,8 @@ from app.core.simulation_engine import simulation_engine
 router = APIRouter()
 
 
-@router.get("/", response_model=List[str])
+@router.get("", response_model=List[str])
+@router.get("/", response_model=List[str], include_in_schema=False)
 async def list_results():
     """List all simulations with saved results."""
     return result_collector.list_simulations()

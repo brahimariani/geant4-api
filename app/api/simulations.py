@@ -22,7 +22,8 @@ from app.core.source_builder import source_builder, SOURCE_TEMPLATES
 router = APIRouter()
 
 
-@router.get("/", response_model=List[SimulationJob])
+@router.get("", response_model=List[SimulationJob])
+@router.get("/", response_model=List[SimulationJob], include_in_schema=False)
 async def list_simulations(
     status: Optional[SimulationStatus] = None
 ):
@@ -39,7 +40,8 @@ async def list_simulations(
     return jobs
 
 
-@router.post("/", response_model=SimulationJob)
+@router.post("", response_model=SimulationJob)
+@router.post("/", response_model=SimulationJob, include_in_schema=False)
 async def create_simulation(request: SimulationRequest):
     """
     Create a new simulation.

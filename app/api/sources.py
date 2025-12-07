@@ -17,7 +17,8 @@ from app.core.source_builder import (
 router = APIRouter()
 
 
-@router.get("/", response_model=List[str])
+@router.get("", response_model=List[str])
+@router.get("/", response_model=List[str], include_in_schema=False)
 async def list_sources():
     """List all saved particle source configurations."""
     return source_builder.list_sources()
@@ -135,7 +136,8 @@ async def list_position_distributions():
     ]
 
 
-@router.post("/", response_model=Dict[str, str])
+@router.post("", response_model=Dict[str, str])
+@router.post("/", response_model=Dict[str, str], include_in_schema=False)
 async def create_source(source: ParticleSource):
     """
     Create and save a new particle source configuration.

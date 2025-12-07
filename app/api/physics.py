@@ -14,7 +14,8 @@ from app.core.physics_builder import (
 router = APIRouter()
 
 
-@router.get("/", response_model=List[str])
+@router.get("", response_model=List[str])
+@router.get("/", response_model=List[str], include_in_schema=False)
 async def list_physics_configs():
     """List all saved physics configurations."""
     return physics_builder.list_physics()
@@ -113,7 +114,8 @@ async def recommend_physics(
     }
 
 
-@router.post("/", response_model=Dict[str, str])
+@router.post("", response_model=Dict[str, str])
+@router.post("/", response_model=Dict[str, str], include_in_schema=False)
 async def create_physics_config(config: PhysicsConfig, name: str):
     """
     Create and save a new physics configuration.
