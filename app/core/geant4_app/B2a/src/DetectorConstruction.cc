@@ -225,7 +225,7 @@ void DetectorConstruction::ConstructSDandField()
     G4String trackerChamberSDname = "/TrackerChamberSD";
     TrackerSD* aTrackerSD = new TrackerSD(trackerChamberSDname, "TrackerHitsCollection");
     G4SDManager::GetSDMpointer()->AddNewDetector(aTrackerSD);
-    SetSensitiveDetector(fLogicChamber, aTrackerSD, true);
+    SetSensitiveDetector(fLogicChamber, aTrackerSD);
 
     G4cout << G4endl << "Sensitive detector attached to chambers" << G4endl;
 }
