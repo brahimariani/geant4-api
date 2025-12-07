@@ -47,6 +47,7 @@ async def lifespan(app: FastAPI):
 # Create FastAPI application
 app = FastAPI(
     title="Geant4 Real-Time API",
+    redirect_slashes=False,  # Prevent 307 redirects for trailing slashes
     description="""
 ## Geant4 Monte Carlo Simulation API
 
