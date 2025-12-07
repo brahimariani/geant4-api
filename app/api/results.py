@@ -51,8 +51,24 @@ async def get_results_summary(simulation_id: str):
     """
     Get summary statistics for a simulation.
     """
+    # Try to load from file first
     results = result_collector.load_results(simulation_id)
+    
+    # If not found, try to get from simulation engine
     if not results:
+        results = await simulation_engine.get_results(simulation_id)
+    
+    if not results:
+        # Check if simulation exists but not completed
+        job = simulation_engine.get_simulation_status(simulation_id)
+        if job:
+            return {
+                "simulation_id": simulation_id,
+                "status": job.status.value,
+                "message": f"Simulation is {job.status.value}. Results available after completion.",
+                "events_completed": job.events_completed,
+                "events_total": job.events_total
+            }
         raise HTTPException(404, f"Results for simulation '{simulation_id}' not found")
     
     return {
